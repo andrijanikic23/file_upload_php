@@ -20,6 +20,7 @@ if(!$image->isValidProportions($width, $height)) {
     die("Slika je preširoka ili previsoka!");
 }
 
+
 $randomName = $image->generateRandomName('jpg');
 if(!is_dir('./uploads')) {
     mkdir('./uploads', 0755, true);
