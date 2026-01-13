@@ -1,7 +1,8 @@
 <?php
 
+require_once "DB.php";
 
-class Images
+class Images extends DB
 {
     const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif"];
     const MAX_FILE_SIZE = 2 * 1024 * 1024;
@@ -12,6 +13,8 @@ class Images
     {
         $finalDestination = $destination."/".$finalName;
         move_uploaded_file($image, $finalDestination);
+        $finalName = $this->connection->real_escape_string($finalName);
+        $this->connection->query("INSERT INTO images(image) VALUES('$finalName')");
     }
 
     public function generateRandomName($extension)
